@@ -14,7 +14,7 @@ searchButton.on('click', function(event){
    var cityName = citySearch.val() 
     console.log(cityName);
     latLong(cityName);
-    recentCities(cityName);
+    // recentCities(cityName);
 
 }) 
 function latLong (city){
@@ -22,7 +22,7 @@ function latLong (city){
     fetch(apiUrl)
     .then(function(response){
         return response.json()
-
+            // console.log(city);
     })
     .then(function(response){
         console.log(response);
@@ -37,11 +37,54 @@ function cityWeather (lat, long) {
     fetch(apiUrl)
     .then(function(response){
         return response.json()
+        // console.log(response);
+       
     })
-    .then(function(response){
-        console.log(response);
+    .then(function(data){
+        for (var i = 1; i <= 5; i) {
+            var startIndex = i * 8;
+            var forecast = data.list[i];
+            var date = forecast.dt_txt;
+            var temperature = forecast.main.temp;
+            var humidity = forecast.main.humidity;
+            var wind = forecast.wind.speed;
+    
+           
+    
+            // Update HTML elements in each forecast card with weather data
+            $("#day" + (startIndex/8)).text(date);
+            $("#temp" + (startIndex/8)).text("Temperature: " + temperature + "°F");
+            $("#humid" + (startIndex/8)).text("Humidity: " + humidity + "%");
+            $("#wind" + (startIndex/8)).text("Wind: " + wind + " mph");
+    
+        }
+       console.log(data)
+       setForecast(data);
+       currentCity(data);
+    
 
     })
 }
 
-function currentCity
+function currentCity(data) {
+// $("#temp").text("Temp: " + data.main.temp + " F");
+  // set temp and humidity
+  var city = data.city.name;
+            var temperature = data.list[0].main.temp;
+            var humidity = data.list[0].main.humidity;
+            var wind = data.list[0].wind.speed;
+            var conditions = data.list[0].weather[0].main;
+            var description = data.list[0].weather[0].description;
+
+            // Update HTML elements with weather data
+            $("#city").text(city);
+            $("#temp").text("Temperature: " + temperature + "°F");
+            $("#humid").text("Humidity: " + humidity + "%");
+            $("#wind").text("Wind: " + wind + " mph");
+
+}
+
+// function setForecast(data) {
+   
+// }
+// }
