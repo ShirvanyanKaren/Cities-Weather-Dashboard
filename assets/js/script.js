@@ -12,7 +12,7 @@ var city;
 searchButton.on('click', function(event){
     event.preventDefault()
    var cityName = citySearch.val() 
-    console.log(cityName);
+    // console.log(cityName);
     latLong(cityName);
     // recentCities(cityName);
 
@@ -25,7 +25,7 @@ function latLong (city){
             // console.log(city);
     })
     .then(function(response){
-        console.log(response);
+        // console.log(response);
         var long = response[0].lon;
         var lat = response[0].lat;
         cityWeather(lat, long);
@@ -33,7 +33,7 @@ function latLong (city){
 }
 
 function cityWeather (lat, long) {
-    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + apiKey;
+    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&units=imperial" + apiKey;
     fetch(apiUrl)
     .then(function(response){
         return response.json()
@@ -41,50 +41,58 @@ function cityWeather (lat, long) {
        
     })
     .then(function(data){
-        for (var i = 1; i <= 5; i) {
-            var startIndex = i * 8;
-            var forecast = data.list[i];
-            var date = forecast.dt_txt;
-            var temperature = forecast.main.temp;
-            var humidity = forecast.main.humidity;
-            var wind = forecast.wind.speed;
-    
-           
-    
-            // Update HTML elements in each forecast card with weather data
-            $("#day" + (startIndex/8)).text(date);
-            $("#temp" + (startIndex/8)).text("Temperature: " + temperature + "°F");
-            $("#humid" + (startIndex/8)).text("Humidity: " + humidity + "%");
-            $("#wind" + (startIndex/8)).text("Wind: " + wind + " mph");
-    
-        }
-       console.log(data)
-       setForecast(data);
-       currentCity(data);
-    
+        
+       console.log(data);
+        currentCity(data);
+        setForecast(data);
 
     })
+    
 }
 
 function currentCity(data) {
-// $("#temp").text("Temp: " + data.main.temp + " F");
-  // set temp and humidity
-  var city = data.city.name;
-            var temperature = data.list[0].main.temp;
-            var humidity = data.list[0].main.humidity;
-            var wind = data.list[0].wind.speed;
-            var conditions = data.list[0].weather[0].main;
-            var description = data.list[0].weather[0].description;
+
+            var city = data.city.name;
+            var forecast =  data.list[0]
+            var temperature = forecast.main.temp;
+            var humidity = forecast.main.humidity;
+            var wind = forecast.wind.speed;
+            var conditions = forecast.weather[0].main;
+            var description = forecast.weather[0].description;
 
             // Update HTML elements with weather data
-            $("#city").text(city);
+            $("#city").html(
+                `${data.city.name}  <img src="http://openweathermap.org/img/w/${
+                  forecast.weather[0].icon}.png"> `
+              );
             $("#temp").text("Temperature: " + temperature + "°F");
             $("#humid").text("Humidity: " + humidity + "%");
             $("#wind").text("Wind: " + wind + " mph");
+            
 
 }
 
-// function setForecast(data) {
-   
-// }
+
+function setForecast(data) {
+    for (var i = 1; i <= 5; i++) {
+        
+        var forecast =  data.list[i]
+        var date = dayjs(forecast.dt_txt).format("MM/DD/YY");
+        var temperature = forecast.main.temp;
+        var humidity = forecast.main.humidity;
+        var wind = forecast.wind.speed;
+        var uvIndex = forecast.uv;
+        var conditions = forecast.weather[0].main;
+        var description = forecast.weather[0].description;
+
+        // Update HTML elements in each forecast card with weather data
+        $("#day" + i).text(date);
+        $("#temp" + i).text("Temperature: " + temperature + "°F");
+        $("#humid" + i).text("Humidity: " + humidity + "%");
+        $("#wind" + i).text("Wind: " + wind + " mph");
+        $("#uv" + i).text("UV Index: " + uvIndex);
+        $("#conditions" + i).text("Conditions: " + conditions);
+        $("#description" + i).text("Description: " + description);
+    }
+}
 // }
