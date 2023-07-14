@@ -1,0 +1,21 @@
+*{
+    font-family: sans-serif;
+}
+.header {
+
+}
+.jumbotron {
+    background-image: linear-gradient(to left, rgb(190, 190, 246), rgb(36, 36, 87));
+    background-color: blue;
+    text-align: center;
+    
+}
+
+.focusCityInfo {
+    border: solid blue 4px;
+    border-radius: 8px;
+}
+
+#recentSearch {
+    content-visibility: hidden;
+}
