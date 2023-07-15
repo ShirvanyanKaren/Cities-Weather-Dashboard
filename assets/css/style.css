@@ -17,5 +17,6 @@
 }
 
 #recentSearch {
-    content-visibility: hidden;
+    content-visibility: visible;
+    
 }
