@@ -34,6 +34,7 @@ function latLong(city) {
             return response.json();
         })
         .then(function (response) {
+            console.log(response)
             var long = response[0].lon;
             var lat = response[0].lat;
             cityWeather(lat, long, city);

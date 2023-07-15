@@ -10,8 +10,8 @@
 JQuery   | [https://www.w3schools.com/jquery/jquery_syntax.asp](https://www.w3schools.com/jquery/jquery_syntax.asp) |   
 Open Weather  | [https://openweathermap.org/](https://openweathermap.org/)| 
 | Git | [https://git-scm.com/](https://git-scm.com/)     | 
-| Deployed Site | [https://shirvanyankaren.github.io/Work-Day-Scheduler/](https://shirvanyankaren.github.io/Work-Day-Scheduler/)     | 
-| My Github Repository | [https://github.com/ShirvanyanKaren/Work-Day-Scheduler](https://github.com/ShirvanyanKaren/Work-Day-Scheduler)     | 
+| Deployed Site | [https://shirvanyankaren.github.io/Cities-Weather-Dashboard/](https://shirvanyankaren.github.io/Cities-Weather-Dashboard/)     | 
+| My Github Repository | [https://github.com/ShirvanyanKaren/Cities-Weather-Dashboard](https://github.com/ShirvanyanKaren/Cities-Weather-Dashboard)     | 
 
 ## Description
 This project was made from scratch using HTML, JQUERY, Dayjs, Bootstrap, and the Open Weather API. Throughout the development of this projext, I had to learn about the syntax around fetch request as well utilize previous interfaces for different purposes. The goal of this weather dashboard was to enable the user to search for the weather of different cities and display these weather conditions as well as a 5 day forecast and recent search history. The project abided by the following acceptance criteria:
@@ -30,7 +30,7 @@ THEN I am again presented with current and future conditions for that city
 
 The finished day planner application is presented below:
 
-![Deployed Weather Dasboard](./assets/images)
+![Deployed Weather Dasboard](./assets/images/Weather-Deployed.png)
 
 ## Table of Contents
 
@@ -163,7 +163,7 @@ for (var i = 0; i < recentSearches.length; i++) {
 
 I also added a clear button for the user to clear their recent searches. 
 
-![Using Day Planner](./assets/images/using-planner.png)
+![Using Day Planner](./assets/images/Weather-Features.png)
 
 
 ## Usage 
