@@ -98,15 +98,16 @@ function addRecentSearch(city) {
 }
 
 function saveRecentSearches() {
-    // Save the recent searches array to local storage
+    // Save the recent searches  to local storage
     localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
 }
 
 function loadRecentSearches() {
-    // Load the recent searches array from local storage
+    // Pull the recent searches array from local storage and use JSON
     var savedSearches = localStorage.getItem("recentSearches");
     if (savedSearches) {
         recentSearches = JSON.parse(savedSearches);
+        console.log(savedSearches)
         displayRecentSearches();
     }
 }
@@ -118,7 +119,7 @@ function displayRecentSearches() {
 
 
 
-    if (recentSearches.length != 0) {
+    if (recentSearches.length > 0) {
         for (var i = 0; i < recentSearches.length; i++) {
             var city = recentSearches[i];
             var button = $("<button>").attr({
